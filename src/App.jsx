@@ -1,13 +1,26 @@
-import './App.css'
+//import './App.css'
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 import MatkaList from './components/MatkaList'
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
 function App() {
-  
 
   return (
     <>
-      <h1>MATKAT</h1>
-      <MatkaList />
+      <Container maxWidth="xl">
+        <CssBaseline />
+        <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">
+            MATKOJA
+          </Typography>  
+        </Toolbar>
+      </AppBar>
+        <MatkaList />
+      </Container>
     </>
   )
 }

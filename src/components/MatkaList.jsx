@@ -1,6 +1,7 @@
 import { useState } from "react";
 //import MatkaTable from "./MatkaTable";
 import MatkaGrid from "./MatkaGrid";
+import { Button, Stack, TextField } from "@mui/material";
 
 export default function MatkaList() {
 
@@ -11,10 +12,14 @@ export default function MatkaList() {
     const inputChanged = (event) => {
         setMatka({ ...matka, [event.target.name]: event.target.value });
     }
-    const addMatka = (event) => {
-        event.preventDefault();
-        console.log("insert new matka to matkat array");
+    const addMatka = () => {
+        if (!matka.kohde.trim()) {
+            // Show alert if kohde is empty
+            alert("Syötä kohde.");
+            return;
+        }
         setMatkat([...matkat, matka]);
+        setMatka({ kohde: '', kesto: '' });
     }
 
     const deleteByIndex = (index) => {
@@ -24,14 +29,27 @@ export default function MatkaList() {
 
     return (
         <>
-            <form onSubmit={addMatka}>
-                <p> <label>Kohdemaa </label><input type="text" name="kohdemaa" value={matka.kohdemaa} onChange={inputChanged} /></p>
-                <p><label>Kesto (päivinä) </label><input type="text" name="kesto" value={matka.kesto} onChange={inputChanged} /></p>
-                <input type="submit" value="lisaa" />
+            <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+                <TextField
+                    label="Kohde"
+                    name="kohde"
+                    value={matka.kohde}
+                    onChange={inputChanged}
+                />
 
-            </form>
+                <TextField
+                    label="Kesto"
+                    name="kesto"
+                    value={matka.kesto}
+                    onChange={inputChanged}
+                />
 
-            <MatkaGrid matkat={matkat} deleteByIndex={deleteByIndex}/>
+                <Button variant="outlined" onClick={addMatka}>
+                    Add
+                </Button>
+            </Stack>
+
+            <MatkaGrid matkat={matkat} deleteByIndex={deleteByIndex} />
         </>
     );
 }
