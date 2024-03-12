@@ -1,5 +1,6 @@
 import { useState } from "react";
-import MatkaTable from "./MatkaTable";
+//import MatkaTable from "./MatkaTable";
+import MatkaGrid from "./MatkaGrid";
 
 export default function MatkaList() {
 
@@ -18,7 +19,7 @@ export default function MatkaList() {
 
     const deleteByIndex = (index) => {
         console.log(index);
-        setMatkat(matkat.filter((matka, i) => i !== index));
+        setMatkat(matkat.filter((matka, i) => i != index));
     }
 
     return (
@@ -30,7 +31,7 @@ export default function MatkaList() {
 
             </form>
 
-            <MatkaTable matkat={matkat} poisto={deleteByIndex}/>
+            <MatkaGrid matkat={matkat} deleteByIndex={deleteByIndex}/>
         </>
     );
 }
